@@ -8,7 +8,7 @@ public:
 	}
 
 	void reloadConfig();
-
+	void terminateDaeon();
 
 	Daemon(Daemon&&) = delete;
 	Daemon& operator=(Daemon&&) = delete;
