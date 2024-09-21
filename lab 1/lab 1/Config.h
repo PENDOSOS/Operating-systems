@@ -6,8 +6,8 @@
 
 struct Config
 {
-	std::vector<std::string> catalog_list;
-	unsigned REPEAT_TIME;
+	std::vector<std::pair<std::string&, unsigned>> catalog_list;
+	unsigned REFRESH_TIME = 20;
 };
 
 bool readConfig(std::string& config_path, Config& config);

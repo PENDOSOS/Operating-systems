@@ -3,7 +3,7 @@
 #
 
 # Добавьте источник в исполняемый файл этого проекта.
-add_executable (CMakeTarget "main.cpp" "Logger.h" "Daemon.cpp" "Daemon.h" "Config.h" "Config.cpp" "Logger.cpp")
+add_executable (CMakeTarget "main.cpp"  "Daemon.cpp" "Daemon.h" "Config.h" "Config.cpp"  "Deleter.h" "Deleter.cpp")
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET CMakeTarget PROPERTY CXX_STANDARD 20)

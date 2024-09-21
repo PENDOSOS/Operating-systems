@@ -1,5 +1,18 @@
 #include <string>
+#include <dirent.h>
+#include <iterator>
+#include <cstdlib>
+#include <cstring>
+#include <sstream>
+#include <iostream>
+#include <stdlib.h>
+#include <string>
+#include <sys/stat.h>
+#include <syslog.h>
 #include <unistd.h>
+#include <vector>
+
+#include "Config.h"
 
 class Daemon
 {
@@ -22,8 +35,14 @@ public:
 private:
 	Daemon(std::string& config_path);
 
-	std::string config_path;
-	std::string PID_PATH;
-	unsigned REPEAT_TIME = 20;
+	void processDir(std::string dir_path);
 
+	std::string config_path;
+	Config* config;
+	std::string PID_PATH;
+
+	pid_t pid;
+	pid_t sid;
+
+	bool is_terminated = false;
 };

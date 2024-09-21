@@ -1,10 +1,5 @@
 #include "Config.h"
 
-inline bool isNumber(std::string& line)
-{
-	return !line.empty() && (line.find_first_not_of("0123456789") == line.npos);
-}
-
 bool readConfig(std::string& config_path, Config& config)
 {
 	std::ifstream file_stream(config_path);
@@ -13,29 +8,31 @@ bool readConfig(std::string& config_path, Config& config)
 	if (!file_stream.is_open())
 		return false;
 
-	unsigned line_count = 0;
-
-	while (line_count != 3)
+	while (std::getline(file_stream, line))
 	{
-		file_stream >> line;
+		std::pair<std::string&, unsigned>& path_and_time;
 		if (!line.empty())
 			continue;
-		else
+		else if (divideString(line, path_and_time))
 		{
-			if (isNumber(line))
-			{
-				config.REPEAT_TIME = stoul(line);
-				line_count++;
-			}
-			else if (config.catalog_list.size() < 3)
-			{
-				config.catalog_list.push_back(line);
-				line_count++;
-			}
-			else
-				return false;
+			config.catalog_list.push_back(path_and_time);
 		}
 	}
 
 	file_stream.close();
+	return true;
+}
+
+bool divideString(std::string& line, std::pair<std::string&, unsigned>& pair)
+{
+	if (line.find(" ") == line.rfind(" "))
+	{
+		std::string dir = line.substr(0, line.find(" "));
+		unsigned refresh_time = stoul(line.substr(line.find(" ")));
+		pair.first = dir;
+		pair.second = refresh_time;
+		return true;
+	}
+	else
+		return false;
 }
