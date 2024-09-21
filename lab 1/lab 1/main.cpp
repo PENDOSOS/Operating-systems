@@ -1,13 +1,15 @@
-﻿// lab 1.cpp: определяет точку входа для приложения.
-//
+﻿#include "Daemon.h"
 
-#include "lab 1.h"
-
-using namespace std;
-
-int main()
+int main(int argc, char** argv)
 {
-	cout << "Hello CMake." << endl;
+    if (argc != 2) {
+        std::cout << "Wrong count of arguments! Programm needs only path to the logger config!" << std::endl;
+        return EXIT_FAILURE;
+    }
+    else
+    {
+        Daemon& daemon = Daemon::getDaemon(std::string(argv[1]));
+    }
 
 	return 0;
 }
