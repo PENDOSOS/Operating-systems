@@ -45,4 +45,9 @@ private:
 	pid_t sid;
 
 	bool is_terminated = false;
+
+	static inline const std::string _daemonName = "deleter";
+	static inline const fs::path _pidPath = fs::path("/var/run/" + _daemonName + ".pid");
+	static inline const int _sleepTime = 20;
+	const fs::path _configPath;
 };

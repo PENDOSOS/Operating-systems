@@ -10,7 +10,7 @@ bool readConfig(std::string& config_path, Config& config)
 
 	while (std::getline(file_stream, line))
 	{
-		std::pair<std::string&, unsigned>& path_and_time;
+		std::pair<fs::path, unsigned> path_and_time;
 		if (!line.empty())
 			continue;
 		else if (divideString(line, path_and_time))
@@ -23,7 +23,7 @@ bool readConfig(std::string& config_path, Config& config)
 	return true;
 }
 
-bool divideString(std::string& line, std::pair<std::string&, unsigned>& pair)
+bool divideString(std::string& line, std::pair<fs::path, unsigned>& pair)
 {
 	if (line.find(" ") == line.rfind(" "))
 	{

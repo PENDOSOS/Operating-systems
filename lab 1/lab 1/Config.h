@@ -3,10 +3,13 @@
 #include <string>
 #include <vector>
 #include <fstream>
+#include <filesystem>
+
+namespace fs = std::filesystem;
 
 struct Config
 {
-	std::vector<std::pair<std::string&, unsigned>> catalog_list;
+	std::vector<std::pair<fs::path, unsigned>> catalog_list;
 	unsigned REFRESH_TIME = 20;
 };
 
